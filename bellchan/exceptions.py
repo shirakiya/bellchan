@@ -1,0 +1,2 @@
+class HTMLTagNotFoundError(Exception):
+    pass
