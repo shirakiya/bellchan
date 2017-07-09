@@ -41,7 +41,7 @@ class Bellchan(object):
                             continue
                         user = event['user']
                         channel = event['channel']
-                        reply_text = f'<@{user}> {reply_text}'
+                        reply_text = f'<@{user}> バファローベルだよ！'
 
                         self.client.rtm_send_message(channel, reply_text)
             except:
