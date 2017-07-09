@@ -1,9 +1,9 @@
-from slackbot.bot import Bot
+from bellchan import Bellchan
 
 
 def main():
-    bot = Bot()
-    bot.run()
+    bellchan = Bellchan()
+    bellchan.run()
 
 
 if __name__ == "__main__":
