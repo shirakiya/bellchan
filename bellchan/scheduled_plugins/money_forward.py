@@ -85,4 +85,4 @@ def notify_budget(schedule, bellchan):
 
         bellchan.push_message(text)
 
-    schedule.every().monday.at('08:00').do(notify)
+    schedule.every().saturday.at('12:00').do(notify)
