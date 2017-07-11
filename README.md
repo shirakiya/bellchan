@@ -1,4 +1,9 @@
 # bellchan
+my home bot.
+
+## Abilities
+- notification budget from [Money forward](https://moneyforward.com/)
+
 
 ## Required
 - Python >= 3.6
@@ -23,8 +28,8 @@ __environment variables__
 | SLACK_API_TOKEN        | string! |         | Slack bot API token                                 |
 | DEFAULT_CHANNEL_ID     | string! |         | Slack channel ID used as default                    |
 | BOT_ID                 | string! |         | Slack bot user ID                                   |
-| MONEY_FORWARD_ID       | string! |         | [Money forward](https://moneyforward.com/) user ID  |
-| MONEY_FORWARD_PASSWORD | string! |         | [Money forward](https://moneyforward.com/) password |
+| MONEY_FORWARD_ID       | string! |         | Money forward user ID  |
+| MONEY_FORWARD_PASSWORD | string! |         | Money forward password |
 
 ## Run App
 ```
