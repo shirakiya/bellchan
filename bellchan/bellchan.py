@@ -4,7 +4,8 @@ from slackclient import SlackClient
 import schedule
 
 from bellchan.settings import Settings
-from bellchan import scheduled_plugins
+from bellchan import message_plugins, scheduled_plugins
+from bellchan.events.message import Message
 
 
 class Bellchan(object):
@@ -14,9 +15,12 @@ class Bellchan(object):
         self.client = SlackClient(self.settings.SLACK_API_TOKEN)
         self.connection_success = False
 
+        self.message_plugins = message_plugins.__all__
+        self.scheduled_plugins = scheduled_plugins.__all__
+
         self.schedule = schedule
-        for func in scheduled_plugins.__all__:
-            func(self.schedule, self)
+        for func in self.scheduled_plugins:
+            func(self, self.schedule)
 
     def connect(self):
         self.connection_success = self.client.rtm_connect()
@@ -32,18 +36,11 @@ class Bellchan(object):
             self.schedule.run_pending()
             try:
                 for event in self.client.rtm_read():
-                    if 'subtype' in event:
+                    if not Message.is_valid(event):
                         continue
-                    if 'type' in event and event['type'] == 'message':
-                        text = event['text']
-                        is_mention = text.find(f'@{self.settings.BOT_ID}') >= 0
-                        if not is_mention:
-                            continue
-                        user = event['user']
-                        channel = event['channel']
-                        reply_text = f'<@{user}> バファローベルだよ！'
-
-                        self.client.rtm_send_message(channel, reply_text)
+                    message = Message(event)
+                    for func in self.message_plugins:
+                        func(self, message)
             except:
                 print(traceback.format_exc())
             time.sleep(1)

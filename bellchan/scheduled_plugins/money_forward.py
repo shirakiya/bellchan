@@ -1,7 +1,7 @@
 from bellchan.lib.money_forward import MoneyForward
 
 
-def notify_budget(schedule, bellchan):
+def notify_budget(bot, schedule):
 
     def notify():
         money_forward = MoneyForward()
@@ -24,6 +24,6 @@ def notify_budget(schedule, bellchan):
         for variable_record in budget_status.variable_records:
             text += f'*{variable_record.name}*: {variable_record.remaining}円\n'
 
-        bellchan.push_message(text)
+        bot.push_message(text)
 
     schedule.every().saturday.at('12:00').do(notify)
