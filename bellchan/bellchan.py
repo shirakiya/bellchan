@@ -29,24 +29,37 @@ class Bellchan(object):
         else:
             print('Connection Failed.')
 
+    def push_message(self, text):
+        if self.connection_success:
+            self.client.rtm_send_message(self.settings.DEFAULT_CHANNEL_ID, text)
+        else:
+            print('Not connect Slack RTM.')
+
+    def handle_error(self, e):
+        text = 'エラーが起きちゃった...\n\n'
+        text += '```\n{error}\n\n{trace_back}\n```'.format(**{
+            'error': repr(e),
+            'trace_back': traceback.format_exc().strip(),
+        })
+
+        if self.connection_success:
+            self.push_message(text)
+        else:
+            print(text)
+
     def run(self):
         self.connect()
 
         while True:
-            self.schedule.run_pending()
             try:
+                self.schedule.run_pending()
+
                 for event in self.client.rtm_read():
                     if not Message.is_valid(event):
                         continue
                     message = Message(event)
                     for func in self.message_plugins:
                         func(self, message)
-            except:
-                print(traceback.format_exc())
+            except Exception as e:
+                self.handle_error(e)
             time.sleep(1)
-
-    def push_message(self, text):
-        if not self.connection_success:
-            print('Not connect Slack RTM.')
-            return
-        self.client.rtm_send_message(self.settings.DEFAULT_CHANNEL_ID, text)

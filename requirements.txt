@@ -1,4 +1,5 @@
 flake8==3.3.0
+mojimoji==0.0.5
 slackclient==1.0.6
 schedule==0.4.3
 requests==2.18.1
