@@ -2,8 +2,8 @@
 my home bot.
 
 ## Abilities
-- notification budget from [Money forward](https://moneyforward.com/)
-- notification today's Tokyo Dome schedule from [Tokyo Dome schedule](https://www.tokyo-dome.co.jp/dome/schedule/)
+- notification budget from [Money forward](https://moneyforward.com/) @ 12:00 on Sat.
+- notification today's Tokyo Dome schedule from [Tokyo Dome schedule](https://www.tokyo-dome.co.jp/dome/schedule/) @ 09:00, 19:00 on every day
 
 
 ## Required
