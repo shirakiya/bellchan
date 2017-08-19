@@ -1,4 +1,5 @@
 from bellchan.exceptions import InvalidEventFormatError
+from bellchan.settings import Settings
 
 
 class Message(object):
@@ -38,8 +39,14 @@ class Message(object):
     def __str__(self):
         return str(self.__dict__)
 
-    def is_dm_channel(self):
+    def is_in_dm_channel(self):
         return self.channel.startswith('D')
+
+    def is_asked(self):
+        return f'@{Settings.BOT_ID}' in self.text
+
+    def is_mentioned(self):
+        return self.is_asked() or self.is_in_dm_channel()
 
     def is_edited(self):
         return bool(self.edited)

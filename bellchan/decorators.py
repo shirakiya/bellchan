@@ -1,16 +1,9 @@
 import functools
 import re
-from bellchan.settings import Settings
 
 
 def _is_match(message, pattern, flags):
     return bool(re.search(pattern, message.text, flags))
-
-
-def _is_mentioned(message):
-    is_mention = message.text.find(f'@{Settings.BOT_ID}') >= 0
-    is_dm_channel = message.is_dm_channel()
-    return is_mention or is_dm_channel
 
 
 def listen_to(pattern, flags=0):
@@ -30,7 +23,7 @@ def respond_to(pattern, flags=0):
         def wrapper(bot, message):
             if not message.is_edited():
                 if _is_match(message, pattern, flags):
-                    if _is_mentioned(message):
+                    if message.is_mentioned():
                         func(bot, message)
         return wrapper
     return receive_func
