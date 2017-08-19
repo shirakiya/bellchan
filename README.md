@@ -3,6 +3,7 @@ my home bot.
 
 ## Abilities
 - notification budget from [Money forward](https://moneyforward.com/)
+- notification today's Tokyo Dome schedule from [Tokyo Dome schedule](https://www.tokyo-dome.co.jp/dome/schedule/)
 
 
 ## Required
