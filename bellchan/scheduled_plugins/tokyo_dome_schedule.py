@@ -7,7 +7,7 @@ def notify_tokyo_dome_schedule(bot, schedule):
         tokyo_dome = TokyoDome()
         tokyo_dome_schedule = tokyo_dome.get_today_schedule()
 
-        if tokyo_dome_schedule.has_program:
+        if tokyo_dome_schedule.has_program():
             text = '今日の東京ドームの予定は\n'
             text += f'- {tokyo_dome_schedule.title}'
 
