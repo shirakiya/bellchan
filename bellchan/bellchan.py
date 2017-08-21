@@ -1,5 +1,6 @@
 import time
 import traceback
+import functools
 from slackclient import SlackClient
 import schedule
 
@@ -20,7 +21,7 @@ class Bellchan(object):
 
         self.schedule = schedule
         for func in self.scheduled_plugins:
-            func(self, self.schedule)
+            func(self, self.schedule, self.handle_schedule_error)
 
     def connect(self):
         self.connection_success = self.client.rtm_connect()
@@ -47,13 +48,23 @@ class Bellchan(object):
         else:
             print(text)
 
+    def handle_schedule_error(self):
+        def receive_func(func):
+            @functools.wraps(func)
+            def wrapper(*args, **kwargs):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    self.handle_error(e)
+            return wrapper
+        return receive_func
+
     def run(self):
         self.connect()
 
         while True:
+            self.schedule.run_pending()
             try:
-                self.schedule.run_pending()
-
                 for event in self.client.rtm_read():
                     if not Message.is_valid(event):
                         continue

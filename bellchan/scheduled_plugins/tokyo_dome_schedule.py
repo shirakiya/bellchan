@@ -1,8 +1,9 @@
 from bellchan.lib.tokyo_dome import TokyoDome
 
 
-def notify_tokyo_dome_schedule(bot, schedule):
+def notify_tokyo_dome_schedule(bot, schedule, handle_schedule_error):
 
+    @handle_schedule_error()
     def notify():
         tokyo_dome = TokyoDome()
         tokyo_dome_schedule = tokyo_dome.get_today_schedule()
