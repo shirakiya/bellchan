@@ -30,6 +30,9 @@ class TokyoDomeSchedule(object):
     def has_program(self):
         return bool(self.title)
 
+    def is_known_time(self):
+        return bool(self.starts)
+
     def is_today(self):
         today = get_now_day()
         return self.day == today
