@@ -1,3 +1,4 @@
+import re
 import requests
 from bs4 import BeautifulSoup
 from bellchan.exceptions import HTMLTagNotFoundError
@@ -7,6 +8,7 @@ from bellchan.lib.tokyo_dome.schedule import TokyoDomeSchedule
 class TokyoDome(object):
 
     URL = 'https://www.tokyo-dome.co.jp/dome/schedule/'
+    TITLE_REGEXP = re.compile(r'^title')
 
     def _get_page(self):
         res = requests.get(self.URL, timeout=10)
@@ -19,7 +21,7 @@ class TokyoDome(object):
             raise HTMLTagNotFoundError('Tokyo Dome schedule day cell is not found.')
         day = day_bs.string.strip()
 
-        title_bs = schedule_tr_bs.find('div', class_='title')
+        title_bs = schedule_tr_bs.find('div', class_=self.TITLE_REGEXP)
         if not title_bs:  # 予定無し
             return TokyoDomeSchedule(day=day, title=None, opening=None, start=None)
 
