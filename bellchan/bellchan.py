@@ -62,4 +62,5 @@ class Bellchan(object):
                         func(self, message)
             except Exception as e:
                 self.handle_error(e)
-            time.sleep(1)
+            finally:
+                time.sleep(1)
