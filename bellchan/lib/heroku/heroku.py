@@ -18,4 +18,4 @@ class Heroku(object):
 
     @classmethod
     def restart(cls):
-        requests.delete(cls.URLS['restart'], headers=cls.get_basic_headers())
+        return requests.delete(cls.URLS['restart'], headers=cls.get_basic_headers())
