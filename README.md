@@ -29,6 +29,7 @@ __environment variables__
 | SLACK_API_TOKEN        | string! |         | Slack bot API token                                 |
 | DEFAULT_CHANNEL_ID     | string! |         | Slack channel ID used as default                    |
 | BOT_ID                 | string! |         | Slack bot user ID                                   |
+| HEROKU_API_KEY         | string! |         | Heroku API Key                                   |
 | MONEY_FORWARD_ID       | string! |         | Money forward user ID  |
 | MONEY_FORWARD_PASSWORD | string! |         | Money forward password |
 

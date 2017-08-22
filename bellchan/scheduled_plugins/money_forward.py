@@ -1,8 +1,9 @@
 from bellchan.lib.money_forward import MoneyForward
 
 
-def notify_budget(bot, schedule):
+def notify_budget(bot, schedule, handle_schedule_error):
 
+    @handle_schedule_error()
     def notify():
         money_forward = MoneyForward()
         budget_status = money_forward.get_budget()
