@@ -25,7 +25,7 @@ class TokyoDomeSchedule(object):
 
     def _extract_time(self, time):
         normalize_time_str = zen_to_han(str(time), kana=False, digit=False)
-        return normalize_time_str.split(' ')
+        return normalize_time_str.split()
 
     def has_program(self):
         return bool(self.title)
