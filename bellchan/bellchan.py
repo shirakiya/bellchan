@@ -30,7 +30,10 @@ class Bellchan(object):
         else:
             print('Connection Failed.')
 
-    def push_message(self, text):
+    def push_message(self, text, with_channel=False):
+        if with_channel:
+            text = f'@channel {text}'
+
         if self.connection_success:
             self.client.rtm_send_message(self.settings.DEFAULT_CHANNEL_ID, text)
         else:

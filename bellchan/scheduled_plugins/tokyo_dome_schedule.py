@@ -21,7 +21,7 @@ def notify_tokyo_dome_schedule(bot, schedule, handle_schedule_error):
         else:
             text = '今日は東京ドームの予定はないみたい！'
 
-        bot.push_message(text)
+        bot.push_message(text, with_channel=True)
 
     for time in ('09:00', '19:00'):
         schedule.every().day.at(time).do(notify)

@@ -26,6 +26,6 @@ def notify_budget(bot, schedule, handle_schedule_error):
         for variable_record in budget_status.variable_records:
             text += f'- *{variable_record.name}*: {variable_record.remaining}円\n'
 
-        bot.push_message(text)
+        bot.push_message(text, with_channel=True)
 
     schedule.every().saturday.at('12:00').do(notify)
