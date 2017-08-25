@@ -32,7 +32,7 @@ class Bellchan(object):
 
     def push_message(self, text, with_channel=False):
         if with_channel:
-            text = f'@channel {text}'
+            text = f'<!channel> {text}'
 
         if self.connection_success:
             self.client.rtm_send_message(self.settings.DEFAULT_CHANNEL_ID, text)
