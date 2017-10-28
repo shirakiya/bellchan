@@ -31,14 +31,14 @@ class TokyoDome(object):
         schedule_tds_bs = schedule_tr_bs.find_all('td')
         if not schedule_tds_bs:
             raise HTMLTagNotFoundError('Tokyo Dome schedule opening or start time cells are not found.')
-        opening_bs = schedule_tds_bs[0]
-        start_bs = schedule_tds_bs[1]
+        opening = schedule_tds_bs[0].string.strip() if schedule_tds_bs[0].string else None
+        start = schedule_tds_bs[1].string.strip() if schedule_tds_bs[1].string else None
 
         return TokyoDomeSchedule(
             day=day,
             title=title,
-            opening=opening_bs.string.strip(),
-            start=start_bs.string.strip(),
+            opening=opening,
+            start=start,
         )
 
     def _get_table_records(self, page_bs):
