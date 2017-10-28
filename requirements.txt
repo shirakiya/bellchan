@@ -1,7 +1,7 @@
-flake8==3.3.0
-mojimoji==0.0.5
-slackclient==1.0.6
+flake8==3.5.0
+mojimoji==0.0.6
+slackclient==1.0.9
 schedule==0.4.3
-requests==2.18.1
+requests==2.18.4
 beautifulsoup4==4.6.0
-lxml==3.8.0
+lxml==4.1.0
