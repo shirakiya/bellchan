@@ -18,7 +18,8 @@ class TokyoDome(object):
     def _build_schedule(self, schedule_tr_bs):
         day_bs = schedule_tr_bs.find('th')
         if not day_bs:
-            raise HTMLTagNotFoundError('Tokyo Dome schedule day cell is not found.')
+            # 1日に複数の予定がある場合はここに入る
+            return None
         day = day_bs.string.strip()
 
         title_bs = schedule_tr_bs.find('div', class_=self.TITLE_REGEXP)
@@ -56,5 +57,5 @@ class TokyoDome(object):
         page_bs = self._get_page()
         for schedule_tr_bs in self._get_table_records(page_bs):
             schedule = self._build_schedule(schedule_tr_bs)
-            if schedule.is_today():
+            if schedule and schedule.is_today():
                 return schedule
