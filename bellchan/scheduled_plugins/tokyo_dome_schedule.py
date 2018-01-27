@@ -1,10 +1,15 @@
+from logging import getLogger
 from bellchan.message_builder import TokyoDomeScheduleMessageBuilder
+
+logger = getLogger(__name__)
 
 
 def notify_tokyo_dome_schedule(bot, schedule, handle_schedule_error):
 
     @handle_schedule_error()
     def notify():
+        logger.info(f'Start scheduled function [notify_tokyo_dome_schedule]')
+
         message_builder = TokyoDomeScheduleMessageBuilder()
         bot_message = message_builder.create()
 

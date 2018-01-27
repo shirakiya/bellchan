@@ -1,17 +1,24 @@
+import functools
+from logging import getLogger
 import time
 import traceback
-import functools
+
 from slackclient import SlackClient
 import schedule
 
+from bellchan.logger import setup_logger
 from bellchan.settings import Settings
 from bellchan import message_plugins, scheduled_plugins
 from bellchan.events.message import Message
+
+logger = getLogger(__name__)
 
 
 class Bellchan(object):
 
     def __init__(self):
+        setup_logger()
+
         self.settings = Settings
         self.client = SlackClient(self.settings.SLACK_API_TOKEN)
         self.connection_success = False
@@ -22,22 +29,28 @@ class Bellchan(object):
         self.schedule = schedule
         for func in self.scheduled_plugins:
             func(self, self.schedule, self.handle_schedule_error)
+            logger.info(f'Set schedule function [{func.__name__}]')
 
     def connect(self):
         self.connection_success = self.client.rtm_connect()
         if self.connection_success:
             self.push_message('起動したよ！')
+            logger.info('Connection success')
         else:
-            print('Connection Failed.')
+            logger.error('Connection failed.')
+
+    def send_message(self, channel, text):
+        if self.connection_success:
+            self.client.rtm_send_message(channel, text)
+            logger.info(f'send message => {text}')
+        else:
+            logger.error('Not connect Slack RTM.')
 
     def push_message(self, text, with_channel=False):
         if with_channel:
             text = f'<!channel> {text}'
 
-        if self.connection_success:
-            self.client.rtm_send_message(self.settings.DEFAULT_CHANNEL_ID, text)
-        else:
-            print('Not connect Slack RTM.')
+        self.send_message(self.settings.DEFAULT_CHANNEL_ID, text)
 
     def handle_error(self, e):
         text = 'エラーが起きちゃった...\n\n'
@@ -48,8 +61,8 @@ class Bellchan(object):
 
         if self.connection_success:
             self.push_message(text)
-        else:
-            print(text)
+
+        logger.error(text)
 
     def handle_schedule_error(self):
         def receive_func(func):
@@ -72,6 +85,7 @@ class Bellchan(object):
                     if not Message.is_valid(event):
                         continue
                     message = Message(event)
+                    logger.info(f'receive message => {message}')
                     for func in self.message_plugins:
                         func(self, message)
             except Exception as e:

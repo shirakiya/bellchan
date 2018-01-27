@@ -7,4 +7,4 @@ def tokyo_dome_schedule(bot, message):
     message_builder = TokyoDomeScheduleMessageBuilder()
     bot_message = message_builder.create()
 
-    bot.client.rtm_send_message(message.channel, bot_message)
+    bot.send_message(message.channel, bot_message)
