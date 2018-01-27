@@ -13,15 +13,17 @@ def notify_tokyo_dome_schedule(bot, schedule, handle_schedule_error):
                 text = '今日の東京ドームの予定は\n'
                 text += f'- {tokyo_dome_schedule.title}'
 
-                if tokyo_dome_schedule.is_known_time():
-                    text += '（開始時間： {}）\n'.format(', '.join([f'{s}〜' for s in tokyo_dome_schedule.starts]))
+                if tokyo_dome_schedule.has_detail_time():
+                    if tokyo_dome_schedule.has_start_time():
+                        text += f'（開始時刻: {tokyo_dome_schedule.start}）\n'
+                    else:
+                        text += f'（開催時間: {tokyo_dome_schedule.opening}）\n'
                 else:
-                    text += '（開始時間不明）\n'
+                    text += '（開催時間不明）\n'
 
                 text += 'が開催されるみたいだよ！'
             else:
                 text = '今日は東京ドームの予定はないみたい！'
-        # スケジュールが見つからなかった場合
         else:
             text = '今日の東京ドームの予定が見つからなかったよ。'
 

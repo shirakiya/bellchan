@@ -10,8 +10,8 @@ class TokyoDomeSchedule(object):
     def __init__(self, day, title, opening, start):
         self.day = self._extract_day_num(day)
         self.title = title if title else None
-        self.openings = self._extract_time(opening) if opening else None
-        self.starts = self._extract_time(start) if start else None
+        self.opening = self._extract_time(opening) if opening else None
+        self.start = self._extract_time(start) if start else None
 
     def __str__(self):
         return str(self.__dict__)
@@ -24,14 +24,16 @@ class TokyoDomeSchedule(object):
         return int(match.group())
 
     def _extract_time(self, time):
-        normalize_time_str = zen_to_han(str(time), kana=False, digit=False)
-        return normalize_time_str.split()
+        return zen_to_han(str(time), kana=False, digit=False)
 
     def has_program(self):
         return bool(self.title)
 
-    def is_known_time(self):
-        return bool(self.starts)
+    def has_detail_time(self):
+        return bool(self.opening) or bool(self.start)
+
+    def has_start_time(self):
+        return bool(self.start)
 
     def is_today(self):
         today = get_now_day()
