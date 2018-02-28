@@ -21,7 +21,9 @@ class Bellchan(object):
 
         self.settings = Settings
         self.client = SlackClient(self.settings.SLACK_API_TOKEN)
+
         self.connection_success = False
+        self.last_connect_timestamp = None
 
         self.message_plugins = message_plugins.__all__
         self.scheduled_plugins = scheduled_plugins.__all__
@@ -31,16 +33,34 @@ class Bellchan(object):
             func(self, self.schedule, self.handle_schedule_error)
             logger.info(f'Set schedule function [{func.__name__}]')
 
-    def connect(self):
+    def _connect(self):
         self.connection_success = self.client.rtm_connect()
+        self.last_connect_timestamp = time.time()
+
+        time.sleep(0.5)  # Wait for connecting to server with rtm_connect()
+
         if self.connection_success:
-            self.push_message('起動したよ！')
             logger.info('Connection success')
         else:
             logger.error('Connection failed.')
 
+        return self.connection_success
+
+    def start_connection(self):
+        if self._connect():
+            self.push_message('起動したよ！')
+
+    def has_expired_connection(self):
+        return time.time() - self.last_connect_timestamp >= 30
+
+    def is_connected(self):
+        if self.has_expired_connection():
+            return self._connect()
+        else:
+            return self.connection_success
+
     def send_message(self, channel, text):
-        if self.connection_success:
+        if self.is_connected():
             self.client.rtm_send_message(channel, text)
             logger.info(f'send message => {text}')
         else:
@@ -59,7 +79,7 @@ class Bellchan(object):
             'trace_back': traceback.format_exc().strip(),
         })
 
-        if self.connection_success:
+        if self.is_connected():
             self.push_message(text)
 
         logger.error(text)
@@ -76,12 +96,14 @@ class Bellchan(object):
         return receive_func
 
     def run(self):
-        self.connect()
+        self.start_connection()
 
         while True:
             self.schedule.run_pending()
+            print('after run_pending')
             try:
                 for event in self.client.rtm_read():
+                    print(f'event: {event}')
                     if not Message.is_valid(event):
                         continue
                     message = Message(event)
