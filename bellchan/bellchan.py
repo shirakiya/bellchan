@@ -100,10 +100,8 @@ class Bellchan(object):
 
         while True:
             self.schedule.run_pending()
-            print('after run_pending')
             try:
                 for event in self.client.rtm_read():
-                    print(f'event: {event}')
                     if not Message.is_valid(event):
                         continue
                     message = Message(event)
