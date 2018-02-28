@@ -1,5 +1,6 @@
 # bellchan
-my home bot.
+bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/python-slackclient).
+
 
 ## Abilities
 - notification budget from [Money forward](https://moneyforward.com/) @ 12:00 on Sat.
@@ -32,6 +33,7 @@ __environment variables__
 | HEROKU_API_KEY         | string! |         | Heroku API Key                                      |
 | MONEY_FORWARD_ID       | string! |         | Money forward user ID                               |
 | MONEY_FORWARD_PASSWORD | string! |         | Money forward password                              |
+
 
 ## Run App
 ```
