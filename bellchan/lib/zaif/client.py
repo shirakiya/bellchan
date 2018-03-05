@@ -23,6 +23,8 @@ class ZaifClient:
     TIMEOUT = 30
 
     def __init__(self):
+        self._call_trade_api_count = 0
+
         self._key = Settings.ZAIF_API_KEY
         self._secret = Settings.ZAIF_API_SECRET
 
@@ -69,9 +71,17 @@ class ZaifClient:
         encoded_params = self._build_encoded_params(method)
         headers = self._build_headers(encoded_params)
 
-        res = requests.post(url, data=encoded_params, headers=headers, timeout=self.TIMEOUT)
+        try:
+            self._call_trade_api_count += 1
+            res = requests.post(url, data=encoded_params, headers=headers, timeout=self.TIMEOUT)
+        except requests.Timeout as e:
+            if self._call_trade_api_count < 5:
+                return self._call_trade_api(url, method)
+            else:
+                raise
 
         if res.status_code != requests.codes.ok:
+            logger.error(f'Something error occured when call to Trade API. Response body => {res.text}')
             res.raise_for_status()
 
         return res.json()
