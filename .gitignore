@@ -98,7 +98,3 @@ ENV/
 
 # mypy
 .mypy_cache/
-
-
-# Project's ignore
-.nonce

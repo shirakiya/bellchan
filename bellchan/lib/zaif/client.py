@@ -48,8 +48,11 @@ class ZaifClient:
         return res.json()
 
     def _build_params(self, method):
+        nonce = self._nonce.get()
+        logger.info(f'Use nonce {nonce}')
+
         return {
-            'nonce': self._nonce.get(),
+            'nonce': nonce,
             'method': method,
         }
 
