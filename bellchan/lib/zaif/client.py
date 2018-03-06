@@ -77,7 +77,7 @@ class ZaifClient:
         try:
             self._call_trade_api_count += 1
             res = requests.post(url, data=encoded_params, headers=headers, timeout=self.TIMEOUT)
-        except requests.Timeout as e:
+        except requests.RequestException as e:
             if self._call_trade_api_count < 5:
                 return self._call_trade_api(url, method)
             else:
