@@ -34,7 +34,7 @@ class Bellchan(object):
             logger.info(f'Set schedule function [{func.__name__}]')
 
     def _connect(self):
-        self.connection_success = self.client.rtm_connect()
+        self.connection_success = self.client.rtm_connect(auto_reconnect=True)
         self.last_connect_timestamp = time.time()
 
         time.sleep(0.5)  # Wait for connecting to server with rtm_connect()
