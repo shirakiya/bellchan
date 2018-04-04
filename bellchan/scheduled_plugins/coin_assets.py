@@ -1,5 +1,6 @@
 from logging import getLogger
 from bellchan.message_builder import CoinAssetsMessageBuilder
+from bellchan.utils.work import parallel
 
 logger = getLogger(__name__)
 
@@ -15,4 +16,4 @@ def notify_coin_assets(bot, schedule, handle_schedule_error):
 
         bot.push_message(bot_message, with_channel=True)
 
-    schedule.every().day.at('09:05').do(notify)
+    schedule.every().day.at('09:05').do(parallel, notify)
