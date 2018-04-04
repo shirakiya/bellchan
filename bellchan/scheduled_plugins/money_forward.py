@@ -1,5 +1,6 @@
 from logging import getLogger
 from bellchan.message_builder import MoneyForwardMessageBuilder
+from bellchan.utils.work import parallel
 
 logger = getLogger(__name__)
 
@@ -15,4 +16,4 @@ def notify_budget(bot, schedule, handle_schedule_error):
 
         bot.push_message(bot_message, with_channel=True)
 
-    schedule.every().saturday.at('12:00').do(notify)
+    schedule.every().saturday.at('12:00').do(parallel, notify)
