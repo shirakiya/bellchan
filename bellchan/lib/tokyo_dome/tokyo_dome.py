@@ -71,18 +71,21 @@ class TokyoDome(object):
             opening = None
             start = None
         else:
-            if self.OPENTIME_REGEXP.search(schedule_text):
-                match = self.OPENTIME_REGEXP.search(schedule_text)
-                opening = '-'.join(match.groups())
+            opentime_match = self.OPENTIME_REGEXP.search(schedule_text)
+            open_match = self.OPEN_REGEXP.search(schedule_text)
+            start_match = self.START_REGEXP.search(schedule_text)
+            # pattern of '開始時間'
+            if opentime_match:
+                opening = '-'.join(opentime_match.groups())
                 start = None
-            elif self.OPEN_REGEXP.search(schedule_text):
-                match_open = self.OPEN_REGEXP.search(schedule_text)
-                opening = match_open.groups()[0]
-                match_start = self.START_REGEXP.search(schedule_text)
-                if match_start:
-                    start = match_start.groups()[0]
-                else:
-                    start = None
+            # pattern of '開場 / 開始'
+            elif open_match:
+                opening = open_match.group(1)
+                start = start_match.group(1) if start_match else None
+            # pattern of '開始'
+            elif start_match:
+                opening = None
+                start = start_match.group(1)
             else:
                 raise TokyoDomeTimeUnknownError('Found unknown statement of schedule time.')
 
