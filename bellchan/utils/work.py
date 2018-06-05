@@ -2,8 +2,8 @@ from multiprocessing import Process
 import time
 
 
-def parallel(job_function):
-    job_process = Process(target=job_function)
+def parallel(job_function, *args):
+    job_process = Process(target=job_function, args=args)
     job_process.start()
 
     while True:
