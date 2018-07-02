@@ -66,11 +66,13 @@ class TokyoDome(object):
         title_bs = detail_cols_bs[1].find_all('p')[0]
         title = title_bs.string.strip()
 
-        schedule_text = detail_cols_bs[1].find_all('p')[1].string.strip()
+        schedule_text = detail_cols_bs[1].find_all('p')[1].string
         if not schedule_text:  # スケジュールなし
             opening = None
             start = None
         else:
+            schedule_text = schedule_text.strip()
+
             opentime_match = self.OPENTIME_REGEXP.search(schedule_text)
             open_match = self.OPEN_REGEXP.search(schedule_text)
             start_match = self.START_REGEXP.search(schedule_text)
