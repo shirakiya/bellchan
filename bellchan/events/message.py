@@ -10,8 +10,6 @@ class Message(object):
         'user',
         'text',
         'ts',
-        'source_team',
-        'team',
     )
 
     OPTIONAL_PROPS = (
