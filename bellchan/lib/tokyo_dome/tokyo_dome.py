@@ -57,14 +57,17 @@ class TokyoDome(object):
         day_bs = schedule_tr_bs.find('th', class_='c-mod-calender__title')
         if not day_bs:
             return None
-        day = day_bs.find('span').string.strip()  # "01"
+        day = day_bs.span.string.strip()  # "01"
 
         detail_cols_bs = schedule_tr_bs.find_all('div', class_='c-mod-calender__detail-col')
         if not detail_cols_bs:  # 予定なし
             return TokyoDomeSchedule(day=day, title=None, opening=None, start=None)
 
         title_bs = detail_cols_bs[1].find_all('p')[0]
-        title = title_bs.string.strip()
+        if title_bs.a:
+            title = ' '.join(s.strip() for s in title_bs.a.strings)
+        else:
+            title = title_bs.string.strip()
 
         schedule_text = detail_cols_bs[1].find_all('p')[1].string
         if not schedule_text:  # スケジュールなし
