@@ -9,7 +9,7 @@ bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/
 
 
 ## Required
-- Python >= 3.6
+- Python 3.7.1
 
 
 ## Setup
@@ -19,7 +19,7 @@ At first, set `bots` integration in Slack setting page and get `API_TOKEN`.
 
 #### Development Setup
 ```
-$ pip install -r requirements.txt
+$ pip install -r requirements-dev.txt
 
 # export environment variables below
 ```
