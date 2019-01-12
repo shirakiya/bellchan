@@ -1,5 +1,5 @@
 import re
-import time
+
 from bellchan.decorators import respond_to
 from bellchan.lib.heroku import Heroku
 

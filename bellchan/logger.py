@@ -6,9 +6,8 @@ def setup_logger():
     logger.setLevel(logging.INFO)
 
     handler = logging.StreamHandler()
-    handler.setLevel(logging.INFO)
-
     formatter = logging.Formatter('[%(levelname)s] %(pathname)s:%(lineno)d: %(message)s')
     handler.setFormatter(formatter)
 
     logger.addHandler(handler)
+    logger.propagate = False

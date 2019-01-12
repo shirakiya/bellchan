@@ -2,7 +2,7 @@ from bellchan.exceptions import InvalidEventFormatError
 from bellchan.settings import Settings
 
 
-class Message(object):
+class Message:
 
     PROPS = (
         'type',

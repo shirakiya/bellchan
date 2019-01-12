@@ -1,15 +1,15 @@
 import re
+
 import requests
 from bs4 import BeautifulSoup
-from bellchan.exceptions import (
-    HTMLTagNotFoundError,
-    TokyoDomeTimeUnknownError,
-)
-from bellchan.lib.tokyo_dome.schedule import TokyoDomeSchedule
+
+from bellchan.exceptions import HTMLTagNotFoundError, TokyoDomeTimeUnknownError
 from bellchan.utils.datetime_utils import get_now_day
 
+from .schedule import TokyoDomeSchedule
 
-class TokyoDome(object):
+
+class TokyoDome:
 
     URL = 'https://www.tokyo-dome.co.jp/dome/event/schedule.html'
     OPENTIME_REGEXP = re.compile(r'開催時間：(\d+:\d{2})[〜～](\d+:\d{2})')

@@ -1,4 +1,5 @@
 from logging import getLogger
+
 from bellchan.message_builder import TokyoDomeScheduleMessageBuilder
 from bellchan.utils.work import parallel
 

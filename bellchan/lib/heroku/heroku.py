@@ -1,8 +1,9 @@
 import requests
+
 from bellchan.settings import Settings
 
 
-class Heroku(object):
+class Heroku:
 
     URLS = {
         'restart': 'https://api.heroku.com/apps/bellchan/dynos/worker',

@@ -1,4 +1,5 @@
 # bellchan
+[![CircleCI](https://circleci.com/gh/shirakiya/bellchan.svg?style=svg)](https://circleci.com/gh/shirakiya/bellchan)  
 bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/python-slackclient).
 
 
@@ -8,7 +9,7 @@ bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/
 
 
 ## Required
-- Python >= 3.6
+- Python 3.7.1
 
 
 ## Setup
@@ -18,7 +19,7 @@ At first, set `bots` integration in Slack setting page and get `API_TOKEN`.
 
 #### Development Setup
 ```
-$ pip install -r requirements.txt
+$ pip install -r requirements-dev.txt
 
 # export environment variables below
 ```
@@ -33,8 +34,6 @@ __environment variables__
 | HEROKU_API_KEY         | string! |         | Heroku API Key                                      |
 | MONEY_FORWARD_ID       | string! |         | Money forward user ID                               |
 | MONEY_FORWARD_PASSWORD | string! |         | Money forward password                              |
-| ZAIF_API_KEY           | string! |         | ZAIF API key                                        |
-| ZAIF_API_SECRET        | string! |         | ZAIF API secret                                     |
 
 
 ## Run App

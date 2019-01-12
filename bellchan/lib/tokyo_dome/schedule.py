@@ -1,30 +1,26 @@
 import re
+
 from bellchan.utils.datetime_utils import get_now_day
-from bellchan.utils.normalize_text import zen_to_han
 
 
-class TokyoDomeSchedule(object):
+class TokyoDomeSchedule:
 
     day_regexp = re.compile(r'\d+')
 
     def __init__(self, day, title, opening, start):
         self.day = self._extract_day_num(day)
         self.title = title if title else None
-        self.opening = self._extract_time(opening) if opening else None
-        self.start = self._extract_time(start) if start else None
+        self.opening = str(opening) if opening else None
+        self.start = str(start) if start else None
 
     def __str__(self):
         return str(self.__dict__)
 
     def _extract_day_num(self, day):
-        normalize_day = zen_to_han(str(day), kana=False, ascii=False)
-        match = self.day_regexp.search(normalize_day)
+        match = self.day_regexp.search(day)
         if not match:
             raise ValueError(f'Invalid day given. {day}')
         return int(match.group())
-
-    def _extract_time(self, time):
-        return zen_to_han(str(time), kana=False, digit=False)
 
     def has_program(self):
         return bool(self.title)
