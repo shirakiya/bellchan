@@ -16,11 +16,3 @@ class HTMLTagNotFoundError(BellchanException):
 
 class TokyoDomeTimeUnknownError(BellchanException):
     pass
-
-
-class ZaifCredentialsError(BellchanException):
-    pass
-
-
-class ZaifResponseError(BellchanException):
-    pass

@@ -33,8 +33,6 @@ __environment variables__
 | HEROKU_API_KEY         | string! |         | Heroku API Key                                      |
 | MONEY_FORWARD_ID       | string! |         | Money forward user ID                               |
 | MONEY_FORWARD_PASSWORD | string! |         | Money forward password                              |
-| ZAIF_API_KEY           | string! |         | ZAIF API key                                        |
-| ZAIF_API_SECRET        | string! |         | ZAIF API secret                                     |
 
 
 ## Run App
