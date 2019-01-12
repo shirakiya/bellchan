@@ -1,4 +1,4 @@
-class BaseBudgetRecord(object):
+class BaseBudgetRecord:
 
     def __init__(self, name, amount, remaining):
         self.name = name

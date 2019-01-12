@@ -1,4 +1,5 @@
 from logging import getLogger
+
 from bellchan.message_builder import MoneyForwardMessageBuilder
 from bellchan.utils.work import parallel
 

@@ -1,12 +1,15 @@
 import os
+
 import requests
 from bs4 import BeautifulSoup
+
 from bellchan.exceptions import HTMLTagNotFoundError
-from bellchan.lib.money_forward.budget_status import BudgetStatus
-from bellchan.lib.money_forward.budget_record import VariableRecord, FixedRecord
+
+from .budget_record import FixedRecord, VariableRecord
+from .budget_status import BudgetStatus
 
 
-class MoneyForward(object):
+class MoneyForward:
 
     URLS = {
         'sign_in_get': 'https://moneyforward.com/users/sign_in',

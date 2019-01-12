@@ -1,20 +1,20 @@
 import functools
-from logging import getLogger
 import time
 import traceback
+from logging import getLogger
 
-from slackclient import SlackClient
 import schedule
+from slackclient import SlackClient
 
+from bellchan import message_plugins, scheduled_plugins
+from bellchan.events import Message
 from bellchan.logger import setup_logger
 from bellchan.settings import Settings
-from bellchan import message_plugins, scheduled_plugins
-from bellchan.events.message import Message
 
 logger = getLogger(__name__)
 
 
-class Bellchan(object):
+class Bellchan:
 
     def __init__(self):
         setup_logger()

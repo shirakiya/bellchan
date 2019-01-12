@@ -1,7 +1,7 @@
-from .budget_record import VariableRecord, FixedRecord
+from .budget_record import FixedRecord, VariableRecord
 
 
-class BudgetStatus(object):
+class BudgetStatus:
 
     def __init__(self):
         self.variable_records = []

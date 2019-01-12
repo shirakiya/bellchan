@@ -1,5 +1,5 @@
-from multiprocessing import Process
 import time
+from multiprocessing import Process
 
 
 def parallel(job_function, *args):

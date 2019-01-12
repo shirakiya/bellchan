@@ -1,9 +1,10 @@
 import re
+
 from bellchan.utils.datetime_utils import get_now_day
 from bellchan.utils.normalize_text import zen_to_han
 
 
-class TokyoDomeSchedule(object):
+class TokyoDomeSchedule:
 
     day_regexp = re.compile(r'\d+')
 
