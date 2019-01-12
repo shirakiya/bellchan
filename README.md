@@ -1,4 +1,5 @@
 # bellchan
+[![CircleCI](https://circleci.com/gh/shirakiya/bellchan.svg?style=svg)](https://circleci.com/gh/shirakiya/bellchan)  
 bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/python-slackclient).
 
 
