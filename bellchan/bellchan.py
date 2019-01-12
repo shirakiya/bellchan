@@ -23,7 +23,6 @@ class Bellchan:
         self.client = SlackClient(self.settings.SLACK_API_TOKEN)
 
         self.connection_success = False
-        self.last_connect_timestamp = None
 
         self.message_plugins = message_plugins.__all__
         self.scheduled_plugins = scheduled_plugins.__all__
@@ -35,7 +34,6 @@ class Bellchan:
 
     def _connect(self):
         self.connection_success = self.client.rtm_connect(auto_reconnect=True)
-        self.last_connect_timestamp = time.time()
 
         time.sleep(0.5)  # Wait for connecting to server with rtm_connect()
 
@@ -46,18 +44,13 @@ class Bellchan:
 
         return self.connection_success
 
-    def start_connection(self):
-        if self._connect():
-            self.push_message('起動したよ！')
-
-    def has_expired_connection(self):
-        return time.time() - self.last_connect_timestamp >= 30
-
     def is_connected(self):
-        if self.has_expired_connection():
-            return self._connect()
-        else:
-            return self.connection_success
+        return self.connection_success
+
+    def start_connection(self):
+        self._connect()
+        if self.is_connected():
+            self.push_message('起動したよ！')
 
     def send_message(self, channel, text):
         if self.is_connected():
