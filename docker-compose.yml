@@ -1,0 +1,30 @@
+version: "3"
+services:
+  bot:
+    build: .
+    image: bellchan-bot
+    depends_on:
+      - redis
+    container_name: bellchan-bot
+    environment:
+      - SLACK_API_TOKEN
+      - DEFAULT_CHANNEL_ID
+      - BOT_ID
+      - REDIS_URL=redis://h:@redis:6379
+      - HEROKU_API_KEY
+      - MONEY_FORWARD_ID
+      - MONEY_FORWARD_PASSWORD
+    networks:
+      app:
+    volumes:
+      - .:/opt/bellchan
+  redis:
+    image: redis:5.0
+    container_name: bellchan-redis
+    networks:
+      app:
+    ports:
+      - 6380:6379
+
+networks:
+  app:
