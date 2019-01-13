@@ -19,12 +19,11 @@ At first, set `bots` integration in Slack setting page and get `API_TOKEN`.
 
 #### Development Setup
 ```
-$ pip install -r requirements-dev.txt
-
-# export environment variables below
+$ pip install pipenv
+$ pipenv install --dev
 ```
 
-__environment variables__
+#### environment variables
 
 | name                   | type    | default | description                                         |
 |------------------------|---------|---------|-----------------------------------------------------|

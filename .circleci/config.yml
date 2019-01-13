@@ -6,21 +6,20 @@ images:
 pip:
   restore_cache: &pip_restore_cache
     keys:
-      - pip-v1-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}-{{ checksum "requirements.txt" }}
+      - pip-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
       - pip-v1-{{ .Branch }}-
       - pip-v1-
 
   install:  &pip_install
     name: Install pip packages
     command: |
-      python3 -m venv ~/venv
-      . ~/venv/bin/activate
-      pip install -r requirements-dev.txt
+      pip install pipenv
+      pipenv install --dev
 
   save_cache: &pip_save_cache
-    key: pip-v1-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}-{{ checksum "requirements.txt" }}
+    key: pip-v1-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
     paths:
-      - ~/venv
+      - .venv
 
 version: 2
 jobs:
@@ -28,6 +27,8 @@ jobs:
     working-directory: *working_directory
     docker:
       - image: *python_image
+        environment:
+          PIPENV_VENV_IN_PROJECT: true
     steps:
       - checkout
       - restore_cache:
@@ -39,8 +40,7 @@ jobs:
       - run:
           name: Run flake8
           command: |
-            . ~/venv/bin/activate
-            flake8 .
+            pipenv run -- flake8 .
 
 workflows:
   version: 2
