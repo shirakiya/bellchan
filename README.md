@@ -16,14 +16,8 @@ bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/
 #### Bots Integration
 At first, set `bots` integration in Slack setting page and get `API_TOKEN`.
 
-
-#### Development Setup
-```
-$ pip install pipenv
-$ pipenv install --dev
-```
-
 #### environment variables
+Export environment variables.
 
 | name                   | type    | default | description                                         |
 |------------------------|---------|---------|-----------------------------------------------------|
@@ -37,5 +31,6 @@ $ pipenv install --dev
 
 ## Run App
 ```
-$ python run.py
+$ docker-compose build
+$ docker-compose up
 ```
