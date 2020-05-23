@@ -4,7 +4,6 @@ bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/
 
 
 ## Abilities
-- notification budget from [Money forward](https://moneyforward.com/) @ 12:00 on Sat.
 - notification today's Tokyo Dome schedule from [Tokyo Dome schedule](https://www.tokyo-dome.co.jp/dome/event/schedule.html) @ 09:00, 19:00 on every day
 
 
@@ -25,8 +24,6 @@ Export environment variables.
 | DEFAULT_CHANNEL_ID     | string! |         | Slack channel ID used as default                    |
 | BOT_ID                 | string! |         | Slack bot user ID                                   |
 | HEROKU_API_KEY         | string! |         | Heroku API Key                                      |
-| MONEY_FORWARD_ID       | string! |         | Money forward user ID                               |
-| MONEY_FORWARD_PASSWORD | string! |         | Money forward password                              |
 
 
 ## Run App
