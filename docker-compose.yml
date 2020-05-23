@@ -12,8 +12,6 @@ services:
       - BOT_ID
       - REDIS_URL=redis://h:@redis:6379
       - HEROKU_API_KEY
-      - MONEY_FORWARD_ID
-      - MONEY_FORWARD_PASSWORD
     networks:
       app:
     volumes:
