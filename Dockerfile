@@ -6,11 +6,12 @@ WORKDIR /opt/bellchan
 
 COPY ./Pipfile .
 COPY ./Pipfile.lock .
-COPY ./run.py .
-COPY ./bellchan bellchan
 
 RUN pip install -U pip \
-    && pip install pipenv \
+    && pip install -U pipenv \
     && pipenv install --system
+
+COPY ./run.py .
+COPY ./bellchan bellchan
 
 CMD ["python", "run.py"]
