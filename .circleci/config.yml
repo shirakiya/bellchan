@@ -1,7 +1,7 @@
 working_directory: &working_directory ~/bellchan
 
 images:
-  python: &python_image circleci/python:3.7.1
+  python: &python_image circleci/python:3.9.1
 
 pip:
   restore_cache: &pip_restore_cache

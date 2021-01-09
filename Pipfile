@@ -16,7 +16,7 @@ redis = "==2.10.6"
 requests = "==2.25.1"
 
 [requires]
-python_version = "3.7"
+python_version = "3.9.1"
 
 [scripts]
 start = "python run.py"
