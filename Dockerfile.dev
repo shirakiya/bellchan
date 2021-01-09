@@ -9,9 +9,9 @@ COPY ./Pipfile.lock .
 
 RUN pip install -U pip \
     && pip install -U pipenv \
-    && pipenv install --system
+    && pipenv install -d
 
 COPY ./run.py .
 COPY ./bellchan bellchan
 
-CMD ["python", "run.py"]
+CMD ["pipenv", "run", "start"]
