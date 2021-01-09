@@ -19,4 +19,5 @@ requests = "==2.25.1"
 python_version = "3.7"
 
 [scripts]
+start = "python run.py"
 lint = "flake8 ."
