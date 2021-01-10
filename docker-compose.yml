@@ -1,11 +1,13 @@
 version: "3"
 services:
   bot:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     image: bellchan-bot
+    container_name: bellchan-bot
     depends_on:
       - redis
-    container_name: bellchan-bot
     environment:
       - SLACK_API_TOKEN
       - DEFAULT_CHANNEL_ID

@@ -1,0 +1,27 @@
+FROM python:3.9.1-slim as builder
+
+WORKDIR /opt
+
+ADD https://github.com/cortesi/modd/releases/download/v0.8/modd-0.8-linux64.tgz .
+RUN tar xvf modd-0.8-linux64.tgz
+
+
+FROM python:3.9.1-slim
+
+ENV TZ Asia/Tokyo
+
+WORKDIR /opt/bellchan
+
+COPY --from=builder /opt/modd-0.8-linux64/modd /usr/local/bin/
+
+COPY ./run.py .
+COPY ./Pipfile .
+COPY ./Pipfile.lock .
+
+RUN pip install -U pip \
+    && pip install -U pipenv \
+    && pipenv install -d
+
+COPY ./bellchan bellchan
+
+CMD ["modd"]
