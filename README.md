@@ -7,10 +7,6 @@ bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/
 - notification today's Tokyo Dome schedule from [Tokyo Dome schedule](https://www.tokyo-dome.co.jp/dome/event/schedule.html) @ 09:00, 19:00 on every day
 
 
-## Required
-- Python 3.7.1
-
-
 ## Setup
 #### Bots Integration
 At first, set `bots` integration in Slack setting page and get `API_TOKEN`.
