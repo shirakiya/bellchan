@@ -14,14 +14,13 @@ WORKDIR /opt/bellchan
 
 COPY --from=builder /opt/modd-0.8-linux64/modd /usr/local/bin/
 
-COPY ./run.py .
-COPY ./Pipfile .
-COPY ./Pipfile.lock .
+COPY ./requirements-dev.txt .
+COPY ./requirements.txt .
 
 RUN pip install -U pip \
-    && pip install -U pipenv \
-    && pipenv install -d
+    && pip install --no-cache-dir -r requirements-dev.txt
 
+COPY ./run.py .
 COPY ./bellchan bellchan
 
 CMD ["modd"]
