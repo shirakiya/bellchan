@@ -13,6 +13,8 @@ services:
       - SLACK_API_TOKEN
       - DEFAULT_CHANNEL_ID
       - BOT_ID
+      - BOT_NAME
+      - BOT_ICON_URL
       - REDIS_URL=redis://h:@redis:6379
       - HEROKU_API_KEY
     networks:

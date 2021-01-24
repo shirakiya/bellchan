@@ -19,4 +19,7 @@ class Heroku:
 
     @classmethod
     def restart(cls):
+        if not Settings.HEROKU_API_KEY:
+            return
+
         return requests.delete(cls.URLS['restart'], headers=cls.get_basic_headers())

@@ -1,6 +1,6 @@
 # bellchan
 [![CircleCI](https://circleci.com/gh/shirakiya/bellchan.svg?style=svg)](https://circleci.com/gh/shirakiya/bellchan)  
-bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/python-slackclient).
+bellchan is my home bot. Using [python-slack_sdk](https://github.com/slackapi/python-slack-sdk).
 
 
 ## Abilities
@@ -11,19 +11,8 @@ bellchan is my home bot. Using [python-slackclient](https://github.com/slackapi/
 #### Bots Integration
 At first, set `bots` integration in Slack setting page and get `API_TOKEN`.
 
-#### environment variables
-Export environment variables.
-
-| name                   | type    | default | description                                         |
-|------------------------|---------|---------|-----------------------------------------------------|
-| SLACK_API_TOKEN        | string! |         | Slack bot API token                                 |
-| DEFAULT_CHANNEL_ID     | string! |         | Slack channel ID used as default                    |
-| BOT_ID                 | string! |         | Slack bot user ID                                   |
-| HEROKU_API_KEY         | string! |         | Heroku API Key                                      |
-
 
 ## Run App
 ```
-$ docker-compose build
-$ docker-compose up
+$ make start
 ```
