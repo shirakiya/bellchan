@@ -1,7 +1,10 @@
 RUN_CONTEXT ?= docker-compose run --rm bot
 
-run:
+start:
 	docker-compose up
+
+run:
+	$(RUN_CONTEXT) python run.py
 
 bash:
 	$(RUN_CONTEXT) bash
