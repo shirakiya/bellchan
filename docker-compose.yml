@@ -9,6 +9,7 @@ services:
     depends_on:
       - redis
     environment:
+      - RUN_CONTEXT=
       - SLACK_API_TOKEN
       - DEFAULT_CHANNEL_ID
       - BOT_ID
