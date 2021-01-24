@@ -6,29 +6,27 @@ images:
 pip:
   restore_cache: &pip_restore_cache
     keys:
-      - pip-v3-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
-      - pip-v3-{{ .Branch }}-
-      - pip-v3-
+      - pip-v4-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}
+      - pip-v4-{{ .Branch }}-
+      - pip-v4-
 
   install:  &pip_install
     name: Install pip packages
-    command: |
-      pip install -U pipenv
-      pipenv install --dev
+    command: pip install -r requirements-dev.txt
 
   save_cache: &pip_save_cache
-    key: pip-v3-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+    key: pip-v4-{{ .Branch }}-{{ checksum "requirements-dev.txt" }}
     paths:
       - .venv
 
 version: 2
 jobs:
   flake8:
-    working_directory: *working_directory
     docker:
       - image: *python_image
-        environment:
-          PIPENV_VENV_IN_PROJECT: true
+    working_directory: *working_directory
+    environment:
+      RUN_CONTEXT: ""
     steps:
       - checkout
       - restore_cache:
@@ -39,8 +37,7 @@ jobs:
           <<: *pip_save_cache
       - run:
           name: Run flake8
-          command: |
-            pipenv run lint
+          command: make lint/flake8
 
 workflows:
   version: 2
