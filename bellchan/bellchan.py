@@ -1,6 +1,8 @@
 import functools
+import time
 import traceback
 from logging import getLogger
+from multiprocessing import Process
 
 import schedule
 from slack_sdk.rtm import RTMClient
@@ -56,7 +58,15 @@ class Bellchan:
         return receive_func
 
     def run(self):
+        Process(target=run_schedule, args=(self,)).start()
+
         self.rtm_client.start()
+
+
+def run_schedule(bot: Bellchan) -> None:
+    while True:
+        bot.schedule.run_pending()
+        time.sleep(1)
 
 
 @RTMClient.run_on(event="message")
