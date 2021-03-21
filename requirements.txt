@@ -1,6 +1,6 @@
 aiohttp==3.7.4.post0
 beautifulsoup4==4.9.3
-lxml==4.6.2
+lxml==4.6.3
 redis==3.5.3
 requests==2.25.1
 schedule==1.0.0
