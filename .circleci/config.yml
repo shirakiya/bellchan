@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  python: circleci/python@1.3.4
+  python: circleci/python@1.3.5
 jobs:
   flake8:
     executor:
