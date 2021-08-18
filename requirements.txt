@@ -4,4 +4,4 @@ lxml==4.6.3
 redis==3.5.3
 requests==2.26.0
 schedule==1.1.0
-slack-sdk==3.9.0
+slack-sdk==3.9.1
