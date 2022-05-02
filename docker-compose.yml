@@ -22,7 +22,7 @@ services:
     volumes:
       - .:/opt/bellchan
   redis:
-    image: redis:6.2
+    image: redis:7.0
     container_name: bellchan-redis
     networks:
       app:
